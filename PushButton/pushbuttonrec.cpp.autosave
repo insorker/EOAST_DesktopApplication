@@ -1,0 +1,22 @@
+#include "pushbuttonrec.h"
+
+PushButtonRec::PushButtonRec(const QColor &bgColor, const QFont &font, const QString &context, const QString &iconPath, QWidget *parent)
+    : QPushButton(parent),
+      bgColor(bgColor),
+      context(context),
+      iconPath(iconPath)
+
+{
+    setFont(font);
+    setBgColor(bgColor);
+    if (iconPath == "")
+    {
+        
+    }
+    
+}
+
+void PushButtonRec::setBgColor(QColor c)
+{
+    
+}
