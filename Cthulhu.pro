@@ -16,6 +16,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Microblog/microblog.cpp \
     PushButton/zbtnlink.cpp \
     PushButton/zbtnnor.cpp \
     PushButton/zbtnrec.cpp \
@@ -31,6 +32,7 @@ SOURCES += \
     titlebar.cpp
 
 HEADERS += \
+    Microblog/microblog.h \
     PushButton/zbtnlink.h \
     PushButton/zbtnnor.h \
     PushButton/zbtnrec.h \
@@ -42,6 +44,7 @@ HEADERS += \
     Widget/librarypage.h \
     Widget/videopage.h \
     cthulhu.h \
+    settings.h \
     titlebar.h
 
 # Default rules for deployment.

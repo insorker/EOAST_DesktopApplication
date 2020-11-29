@@ -4,9 +4,9 @@
 AboutPage::AboutPage(QWidget *parent)
     : QWidget(parent),
       _logo(new QLabel("LOGO", this)),
-      _Cthlhu(new QLabel("CTHLHU", this)),
-      _test1(new ZBtnLink("rgb(255,255,255)", "rgb(254,67,101)", QFont("Microsoft YaHei", 16), "Preferences", "", this)),
-      _test2(new ZBtnLink("rgb(255,255,255)", "rgb(254,67,101)", QFont("Microsoft YaHei", 16), "Manage Profiles", "", this))
+      _Cthlhu(new QLabel("油泥怪/insorker", this)),
+      _test1(new ZBtnLink("rgb(255,255,255)", "rgb(254,67,101)", QFont("Microsoft YaHei", 16), "南京邮电大学", "", this)),
+      _test2(new ZBtnLink("rgb(255,255,255)", "rgb(254,67,101)", QFont("Microsoft YaHei", 16), "电光微院院科协", "", this))
 {
 }
 

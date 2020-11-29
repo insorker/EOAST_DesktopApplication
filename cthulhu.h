@@ -18,6 +18,7 @@
 #include "Widget/blogpage.h"
 #include "Widget/exhibitionpage.h"
 #include "Widget/aboutpage.h"
+#include "settings.h"
 
 class Cthulhu : public QWidget
 {
@@ -30,9 +31,9 @@ public slots:
     void pageSwitch(int index);
 protected:
     void paintEvent(QPaintEvent *);
+    void setBackgroundPic(const QString &bgPath);
 private:
     QString _bgColor;
-    int _titleBarHeight;
     ZBtnLink *btn_test1;
     ZBtnRec *btn_test2;
     ZBtnNor *btn_test3;

@@ -14,18 +14,21 @@ TitleBar::TitleBar(const QString &bgColor, const QString &color, const QFont &fo
       _blog(new ZBtnNor(bgColor, color, font, "博客", "", this)),
       _exhibition(new ZBtnNor(bgColor, color, font, "成就", "", this)),
       _about(new ZBtnNor(bgColor, color, font, "关于", "", this)),
-      _totalTag(6)
+      _totalTag(6),
+      _account(new QPushButton(this)),
+      _settings(new QPushButton(this))
 {
     setStyleSheet(QString("QLabel{background-color:%1;}").arg(_bgColor));
     setMinimumWidth(1100);
     init();
 
-    connect(_index, &QPushButton::clicked, [=]{ btnClicked(0); });
-    connect(_library, &QPushButton::clicked, [=]{ btnClicked(1); });
-    connect(_video, &QPushButton::clicked, [=]{ btnClicked(2); });
-    connect(_blog, &QPushButton::clicked, [=]{ btnClicked(3); });
-    connect(_exhibition, &QPushButton::clicked, [=]{ btnClicked(4); });
-    connect(_about, &QPushButton::clicked, [=]{ btnClicked(5); });
+    connect(_index, &QPushButton::clicked, [=]{ menuSwitch(0); });
+    connect(_library, &QPushButton::clicked, [=]{ menuSwitch(1); });
+    connect(_video, &QPushButton::clicked, [=]{ menuSwitch(2); });
+    connect(_blog, &QPushButton::clicked, [=]{ menuSwitch(3); });
+    connect(_exhibition, &QPushButton::clicked, [=]{ menuSwitch(4); });
+    connect(_about, &QPushButton::clicked, [=]{ menuSwitch(5); });
+    connect(_settings, &QPushButton::clicked, this, &TitleBar::changeBackground);
 }
 
 void TitleBar::paintEvent(QPaintEvent *)
@@ -57,6 +60,13 @@ void TitleBar::init()
     placeMenu(_blog, height, menuWidth);
     placeMenu(_exhibition, height, menuWidth);
     placeMenu(_about, height, menuWidth);
+
+    _account->setStyleSheet(QString("QPushButton{border-image:url(:/img/account.png);background-color:%1}").arg(_bgColor));
+    _account->resize(g_titleBarHeight - 20, g_titleBarHeight - 20);
+    _account->move(this->width() - g_titleBarHeight - 100, 10);
+    _settings->setStyleSheet(QString("QPushButton{border-image:url(:/img/settings.png);background-color:%1}").arg(_bgColor));
+    _settings->resize(g_titleBarHeight - 20, g_titleBarHeight - 20);
+    _settings->move(this->width() - 100, 10);
 }
 
 void TitleBar::placeMenu(ZBtnNor *const btn, const int height, const int width)
@@ -66,7 +76,23 @@ void TitleBar::placeMenu(ZBtnNor *const btn, const int height, const int width)
     _nextPos += width + 20;
 }
 
-void TitleBar::btnClicked(int index)
+void TitleBar::menuSwitch(int index)
 {
     emit emitMenuSwitch(index);
+}
+
+void TitleBar::changeBackground()
+{
+    QString bgPath = QFileDialog::getOpenFileName(this, "打开图片", ".", "Text(*.png *.jpg *.bmp)");
+
+    if (bgPath.isEmpty())
+    {
+          QMessageBox mesg;
+          mesg.warning(this, "警告", "打开图片失败!");
+          return;
+     }
+     else
+     {
+        emitChangeBackground(bgPath);
+     }
 }
